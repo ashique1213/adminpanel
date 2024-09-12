@@ -1,0 +1,28 @@
+body {
+    background-color: #e9ecef;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.welcome {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.btn-logout {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+.btn-logout:hover {
+    background-color: #c82333;
+}

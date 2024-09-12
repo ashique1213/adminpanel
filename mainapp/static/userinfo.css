@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d3d3d3; /* Light grey background */
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.table-container, .form-container, .home-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-container {
+    display: block; /* Show initially */
+}
+
