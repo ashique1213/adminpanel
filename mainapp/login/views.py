@@ -1,17 +1,13 @@
-# from django.shortcuts import render
-
-# # Create your views here.
-
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import never_cache
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponse
 
 
 @never_cache
 def loginpage(request):
     if request.user.is_authenticated:
         return redirect('home')
+    
     error_message= None
     if request.method == "POST":
         username = request.POST.get("username")
@@ -19,7 +15,10 @@ def loginpage(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("home")
+            if request.user.is_staff:
+                return redirect('admin_panel')
+            else:
+                return redirect("home")
         else:
             error_message=("Username or Password Incorrect!!!")
     return render(request, "login.html",{'error_message':error_message})

@@ -28,15 +28,22 @@
                 </ul>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item active fw-bold">
-                        <a class="nav-link active" href="#" onclick="logout()">LOGOUT</a>
+                        <a class="nav-link active" href="{% url 'logoutadmin' %}" onclick="logout()">LOGOUT</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    
     <!-- Main Content -->
     <div class="container">
-        
+        <form method="get" action="{% url 'userinfo' %}">
+            <div class="input-group mb-3">
+                <input type="text" id="searchInput" name="search" class="form-control" placeholder="Search users by name or email..." value="{{ request.GET.search }}">
+                <button id="searchButton" class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
         <!-- User Info Section -->
         <div class="table-container">
 
