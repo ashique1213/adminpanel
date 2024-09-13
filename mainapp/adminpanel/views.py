@@ -35,7 +35,19 @@ def adduser(request):
             if pass1 != pass2:
                 messages.error(request, "Passwords do not match.")
                 return redirect('adduser')
+            
+            if len(pass1) < 5:
+                messages.error(request, "Password must be at least 5 characters long.")
+                return redirect('adduser')
+            
+            if ' ' in pass1 or len(pass1.strip()) == 0:
+                messages.error(request, "Password cannot contain spaces or be empty.")
+                return redirect('adduser')
 
+            if ' ' in uname or len(uname.strip()) == 0:
+                messages.error(request, "Username cannot contain spaces or be empty.")
+                return redirect('adduser')
+        
             if User.objects.filter(username=uname).exists():
                 messages.error(request, "Username already taken.")
                 return redirect('adduser')
@@ -69,6 +81,15 @@ def edituser(request, user_id):
             email = request.POST.get('email')
             pass1 = request.POST.get('password1')
             pass2 = request.POST.get('password2')
+            
+
+            if ' ' in pass1 or len(pass1.strip()) == 0:
+                messages.error(request, "Password cannot contain spaces or be empty.")
+                return redirect('edituser',user_id=user.id)
+
+            if ' ' in uname or len(uname.strip()) == 0:
+                messages.error(request, "Username cannot contain spaces or be empty.")
+                return redirect('edituser',user_id=user.id)
             
             if pass1 and pass1 != pass2:
                 messages.error(request, "Passwords do not match.")

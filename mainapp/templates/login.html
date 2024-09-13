@@ -25,6 +25,12 @@
             <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-secondary logbtn">Login</button>
             </div>
+            {% if error_message %}
+            <div class="alert alert-danger">
+                    {{ error_message }}
+            </div>
+            {% endif %}
+
         </form>
         <div class="signup-link">
             <p>Don't have an account? <a href="{% url 'signup' %}" class="btn btn-outline-success">Sign Up</a></p>
