@@ -38,6 +38,8 @@ def sign(request):
             my_user=User.objects.create_user(uname,email,pass1)
             my_user.save()
             print(uname,email,pass1,pass2)
-            return redirect('login')
+            messages.success(request, "Registered Succesfully...")
+            return redirect('signup')
+            # return redirect('login')
     
     return render(request,'signup.html')

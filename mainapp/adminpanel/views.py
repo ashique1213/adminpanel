@@ -82,11 +82,6 @@ def edituser(request, user_id):
             pass1 = request.POST.get('password1')
             pass2 = request.POST.get('password2')
             
-
-            if ' ' in pass1 or len(pass1.strip()) == 0:
-                messages.error(request, "Password cannot contain spaces or be empty.")
-                return redirect('edituser',user_id=user.id)
-
             if ' ' in uname or len(uname.strip()) == 0:
                 messages.error(request, "Username cannot contain spaces or be empty.")
                 return redirect('edituser',user_id=user.id)
