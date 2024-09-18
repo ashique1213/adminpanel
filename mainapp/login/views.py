@@ -6,8 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 @never_cache
 def loginpage(request):
     if request.user.is_authenticated:
-        return redirect('home')
-    
+    #     return redirect('home')
+        if request.user.is_staff:
+            return redirect('admin_panel')
+        else:
+            return redirect('home')
+
+
     error_message= None
     if request.method == "POST":
         username = request.POST.get("username")
@@ -27,9 +32,11 @@ def loginpage(request):
 @never_cache
 def homepage(request):
     if request.user.is_authenticated:
-        return render(request, "home.html")
+        name=request.user.username
+        return render(request, "home.html",{'name':name})
     return redirect('login')
 
+@never_cache
 def logoutpage(request):
     if request.user.is_authenticated:
         logout(request)

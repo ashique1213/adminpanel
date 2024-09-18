@@ -111,7 +111,7 @@ def edituser(request, user_id):
     
     return render(request,'login.html')
 
-
+@never_cache
 def logoutadmin(request):
     if request.user.is_authenticated:
         logout(request)
