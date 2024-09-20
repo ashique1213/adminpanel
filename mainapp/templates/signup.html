@@ -32,12 +32,20 @@
                 <input type="password" class="form-control" id="confirm-password" name="password2" placeholder="Confirm your password" required>
             </div>
             {% if messages %}
-            <div>
-            {% for message in messages %}
-                <div class="alert alert-danger">{{ message }}</div>
-            {% endfor %}
-            </div>
+                <div>
+                {% for message in messages %}
+                    <div class="alert 
+                        {% if message.tags == 'success' %} alert-success 
+                        {% elif message.tags == 'error' %} alert-danger 
+                        {% elif message.tags == 'warning' %} alert-warning 
+                        {% elif message.tags == 'info' %} alert-info 
+                        {% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
             {% endif %}
+
             <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-secondary signup-btn">Sign Up</button>
             </div>

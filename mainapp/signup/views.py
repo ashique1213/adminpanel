@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
+import re
 
 
-# Create your views here.
 def sign(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     if request.method =='POST':
         uname=request.POST.get('username')
         email=request.POST.get('email')
@@ -21,6 +24,10 @@ def sign(request):
         
         if ' ' in pass1 or len(pass1.strip()) == 0:
             messages.error(request, "Password cannot contain spaces or be empty.")
+            return redirect('signup')
+        
+        if not re.search(r'[a-z]', pass1):
+            messages.error(request, "Password must contain at least one lowercase letter.")
             return redirect('signup')
 
         if ' ' in uname or len(uname.strip()) == 0:
@@ -40,6 +47,6 @@ def sign(request):
             print(uname,email,pass1,pass2)
             messages.success(request, "Registered Succesfully...")
             return redirect('signup')
-            # return redirect('login')
-    
+   
     return render(request,'signup.html')
+
